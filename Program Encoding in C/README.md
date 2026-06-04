@@ -1,2 +1,2 @@
 # Program Encoding in C
-![alt text](images/The compilation system.png)
+![alt text](images/the-compilation-system.png)
