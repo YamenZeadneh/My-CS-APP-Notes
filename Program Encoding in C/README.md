@@ -1,17 +1,17 @@
 # Program Encoding in C
 ![alt text](images/the-compilation-system.png)
 ##  C compiling   
-normally 
+### Basic Compilation
 ```
 gcc -o ExecutableFile fileName.c
 ```
-- as gcc is the compilier name 
+- as `gcc` is the compilier name 
 - to merge file:
 ```
 gcc -Og -o  ExecutableFile firstfile.c secondfile.c
 ```
-- -Og refer to the optimization level as -O1 -O2 are higher in performance 
-- you  can see th assembly code with -S insted of the -o 
+- `-Og` refer to the optimization level as `-O1 -O2` are higher in performance 
+- you  can see th assembly code with `-S` insted of the `-o` 
 ```
 gcc -Og -S code.c
 ```
