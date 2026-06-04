@@ -12,4 +12,4 @@
 - add `z`or`s` befor data size to controle how to deal with the new bits Like `movzbq`
 - `z` for zero-extending and `s` for sign-extinding
 - add another data type to set the new reg size 
-- Examble `movsbw`Move sign-extended byte to word sign extension
+- Examble:`movsbw`Move sign-extended byte to word
