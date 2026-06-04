@@ -10,8 +10,12 @@ gcc -o ExecutableFile fileName.c
 ```
 gcc -Og -o  ExecutableFile firstfile.c secondfile.c
 ```
-- `-Og` refer to the optimization level as `-O1 -O2` are higher in performance 
+- `-Og` refer to the optimization level as `-O1` `-O2` are higher in performance 
 - you  can see th assembly code with `-S` insted of the `-o` 
 ```
 gcc -Og -S code.c
+```
+### object dump 
+```
+objdump -d ExecutableFile.o
 ```
