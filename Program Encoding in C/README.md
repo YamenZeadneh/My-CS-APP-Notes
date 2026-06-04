@@ -15,7 +15,8 @@ gcc -Og -o  ExecutableFile firstfile.c secondfile.c
 ```
 gcc -Og -S code.c
 ```
-### object dump 
+### object dump (disassemblers)
 ```
 objdump -d ExecutableFile.o
 ```
+- `-d` is the command-line flag
