@@ -14,4 +14,4 @@
 - add another data type to set the new reg size 
 - Examble:`movsbw`Move sign-extended byte to word
 ##  Arithmetic and Logical Operations
-![alt text](Integer-arithmetic-operations.png)
+![alt text](images/Integer-arithmetic-operations.png)
