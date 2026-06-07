@@ -13,5 +13,7 @@
 - `z` for zero-extending and `s` for sign-extinding
 - add another data type to set the new reg size 
 - Examble:`movsbw`Move sign-extended byte to word
+## Stack opration
+![alt text](images/stack.png)
 ##  Arithmetic and Logical Operations
 ![alt text](images/Integer-arithmetic-operations.png)
