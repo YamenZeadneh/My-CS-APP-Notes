@@ -180,17 +180,22 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-  return 2;
+  int m = 0x0A;
+  m = m | (m<<4); //m=AA
+  m = m | (m<<8); //m=AAAA
+  m = m | (m<<16);//m=AAAAAAAA
+ 
+  return !((x & m) ^ m);
 }
 /* 
- * negate - return -x 
+ * negate - return -x  
  *   Example: negate(1) = -1.
  *   Legal ops: ! ~ & ^ | + << >>
  *   Max ops: 5
  *   Rating: 2
  */
 int negate(int x) {
-  return 2;
+  return (~x + 1);
 }
 //3
 /* 
@@ -203,7 +208,14 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+  int max = 0x39;
+  int min = 0x30;
+  int isbigger = max + ~x + 1;
+  isbigger = isbigger>>31;
+  int issmaller = x + ~min + 1;
+  issmaller = issmaller>>31;
+  int ans = isbigger | issmaller;
+  return !ans;
 }
 /* 
  * conditional - same as x ? y : z 
@@ -211,9 +223,23 @@ int isAsciiDigit(int x) {
  *   Legal ops: ! ~ & ^ | + << >>
  *   Max ops: 16
  *   Rating: 3
+ * if(!x == 1)
+ *  ret z
+ * ret y
  */
 int conditional(int x, int y, int z) {
-  return 2;
+  
+  x = !x;
+  x = x | x<<1;
+  x = x | x<<2;
+  x = x | x<<4;
+  x = x | x<<8;
+  x = x | x<<16;//if !x == 1 : x = 0xFFFFFFFF else x = 0x00000000
+
+
+   z = x & z;
+   y = ~x & y;
+  return (y|z);
 }
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
