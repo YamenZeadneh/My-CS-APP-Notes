@@ -13,7 +13,11 @@
 - `z` for zero-extending and `s` for sign-extinding
 - add another data type to set the new reg size 
 - Examble:`movsbw`Move sign-extended byte to word
-## Stack opration
+## Stack operation
 ![alt text](images/stack.png)
+- useful for evaluating complex math expressions.
 ##  Arithmetic and Logical Operations
 ![alt text](images/Integer-arithmetic-operations.png)
+
+## Special Arithmetic Operations
+![alt text](images/Special-Arithmetic-Operations.png)
