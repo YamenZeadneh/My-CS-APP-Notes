@@ -390,10 +390,9 @@ int floatFloat2Int(unsigned uf) {
  */
 unsigned floatPower2(int x) {
   int Exp = x+127;
-  int frac = 1;
-  if(Exp<0){
+  if(Exp<0)
     return 0;
-  }
+  
   if(Exp>255)
     return 0xFF<<23;
 
