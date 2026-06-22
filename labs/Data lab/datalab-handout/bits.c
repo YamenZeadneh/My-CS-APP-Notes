@@ -323,7 +323,16 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-  return 2;
+  int sign = uf>>31;
+  int Exp = (uf>>23)&0x00FF;
+  int fraction = uf&0x007FFFFF;
+
+  if(Exp!=0 && Exp!=255)
+    Exp++;
+  else if(Exp==0)
+    fraction*=2;
+    
+  return (sign<<31)|((Exp)<<23)|fraction;
 }
 /* 
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
@@ -336,9 +345,35 @@ unsigned floatScale2(unsigned uf) {
  *   Legal ops: Any integer/unsigned operations incl. ||, &&. also if, while
  *   Max ops: 30
  *   Rating: 4
+*   31           30..........23   22.............0
+    +------------+-------------+----------------+
+    | Sign (1)   | Exp (8)     | Fraction (23)  |
+    +------------+-------------+----------------+
  */
 int floatFloat2Int(unsigned uf) {
-  return 2;
+  int sign = uf>>31;
+  int Exp = ((uf>>23)&0x00FF) - 127;
+  int fraction;
+  if(Exp==0)
+    fraction = 1;
+  
+  fraction = (uf&0x007FFFFF) | (1 << 23);
+  //
+  if(Exp==128)
+    return 0x80000000u;
+  if(Exp<0)
+    return 0;
+  if(Exp>31)
+    return 0x80000000u;
+  //
+  int V;
+  if(Exp>23)
+    V = fraction << (Exp-23);
+  else
+    V = fraction >> (23-Exp);
+  if(sign)
+    return -V;
+  return V;
 }
 /* 
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
@@ -354,5 +389,13 @@ int floatFloat2Int(unsigned uf) {
  *   Rating: 4
  */
 unsigned floatPower2(int x) {
-    return 2;
+  int Exp = x+127;
+  int frac = 1;
+  if(Exp<0){
+    return 0;
+  }
+  if(Exp>255)
+    return 0xFF<<23;
+
+    return (Exp<<23);
 }
