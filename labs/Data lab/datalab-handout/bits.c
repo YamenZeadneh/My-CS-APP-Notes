@@ -292,31 +292,42 @@ int logicalNeg(int x) {
  */
 int howManyBits(int x) {
   int sx = x>>31;
+  sx = !sx;
+  sx = sx | sx<<1;
+  sx = sx | sx<<2;
+  sx = sx | sx<<4;
+  sx = sx | sx<<8;
+  sx = sx | sx<<16;//if !sx == 1 : sx = 0xFFFFFFFF else sx = 0x00000000
+
   x =  x&(!sx) + (~x + 1)&(sx);//make x always positive
   //ret roundmin(log2(x)) + 1 
   //16-16
   int upper = 0xFF;
   upper += upper<<8;
-  x = (x>>16)&(!!(x>>16))|((x&upper)&(!(x>>16)));
-  int y = (16)&(!!(x>>16))|((0)&(!(x>>16)));
+  int ux=x>>16;
+  x = (ux)&(!!ux)|((x&upper)&(!ux));
+  int y = (16)&(!!ux);
   //8-8
   upper = 0xFF;
-  x = (x>>8)&(!!(x>>8))|((x&upper)&(!(x>>8)));
-  y += (8)&(!!(x>>8))|((0)&(!(x>>8)));
+  ux = ux>>8;
+  x = (ux)&(!!ux)|((x&upper)&(!ux));
+  y += (8)&(!!ux);
   //4-4
+  ux=ux>>4;
   upper = 0x0F;
-  x = (x>>4)&(!!(x>>4))|((x&upper)&(!(x>>4)));
-  y += (4)&(!!(x>>4))|((0)&(!(x>>4)));
+  x = (x>>4)&(!!ux)|((x&upper)&(!ux));
+  y += (4)&(!!ux);
   //2-2
   upper = 0x03;
-  x = (x>>2)&(!!(x>>2))|((x&upper)&(!(x>>2)));
-  y += (2)&(!!(x>>2))|((0)&(!(x>>2)));
+  ux=ux>>2;
+  x = (ux)&(!!ux)|((x&upper)&(!ux));
+  y += (2)&(!!ux);
   //1-1
   upper = 0x01;
-  x = (x>>1)&(!!(x>>1))|((x&upper)&(!(x>>1)));
-  y += (1)&(!!(x>>1))|((0)&(!(x>>1)));
+  ux=ux>>1;
+  x = (ux)&(!!ux)|((x&upper)&(!ux));
+  y += (1)&(!!ux);
   
-
 
   return y+1;
 }
