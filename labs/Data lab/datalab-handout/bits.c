@@ -291,45 +291,24 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  int sx = x>>31;
-  sx = !sx;
-  sx = sx | sx<<1;
-  sx = sx | sx<<2;
-  sx = sx | sx<<4;
-  sx = sx | sx<<8;
-  sx = sx | sx<<16;//if !sx == 1 : sx = 0xFFFFFFFF else sx = 0x00000000
+  int sign = x >> 31;
+  x = x ^ sign; // if negative: ~x; else: x
 
-  x =  x&(!sx) + (~x + 1)&(sx);//make x always positive
-  //ret roundmin(log2(x)) + 1 
-  //16-16
-  int upper = 0xFF;
-  upper += upper<<8;
-  int ux=x>>16;
-  x = (ux)&(!!ux)|((x&upper)&(!ux));
-  int y = (16)&(!!ux);
-  //8-8
-  upper = 0xFF;
-  ux = ux>>8;
-  x = (ux)&(!!ux)|((x&upper)&(!ux));
-  y += (8)&(!!ux);
-  //4-4
-  ux=ux>>4;
-  upper = 0x0F;
-  x = (x>>4)&(!!ux)|((x&upper)&(!ux));
-  y += (4)&(!!ux);
-  //2-2
-  upper = 0x03;
-  ux=ux>>2;
-  x = (ux)&(!!ux)|((x&upper)&(!ux));
-  y += (2)&(!!ux);
-  //1-1
-  upper = 0x01;
-  ux=ux>>1;
-  x = (ux)&(!!ux)|((x&upper)&(!ux));
-  y += (1)&(!!ux);
   
+  int b16, b8, b4, b2, b1, b0;
+  b16 = !!(x >> 16) << 4;//set b16 to 16(2^4) if there's at least one 1 bit at the most 16 bit  
+  x >>= b16;             // clear the lower half if the upper has a 1 bit 
+  b8  = !!(x >>  8) << 3;  
+  x >>= b8;
+  b4  = !!(x >>  4) << 2;  
+  x >>= b4;
+  b2  = !!(x >>  2) << 1;  
+  x >>= b2;
+  b1  = !!(x >>  1);       
+  x >>= b1;
+  b0  = x;
 
-  return y+1;
+  return b16 + b8 + b4 + b2 + b1 + b0 + 1;
 }
 //float
 /* 
