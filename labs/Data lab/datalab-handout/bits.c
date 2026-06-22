@@ -292,9 +292,33 @@ int logicalNeg(int x) {
  */
 int howManyBits(int x) {
   int sx = x>>31;
-  x =  x^sx + ~sx + 1;//make x always positive
+  x =  x&(!sx) + (~x + 1)&(sx);//make x always positive
+  //ret roundmin(log2(x)) + 1 
+  //16-16
+  int upper = 0xFF;
+  upper += upper<<8;
+  x = (x>>16)&(!!(x>>16))|((x&upper)&(!(x>>16)));
+  int y = (16)&(!!(x>>16))|((0)&(!(x>>16)));
+  //8-8
+  upper = 0xFF;
+  x = (x>>8)&(!!(x>>8))|((x&upper)&(!(x>>8)));
+  y += (8)&(!!(x>>8))|((0)&(!(x>>8)));
+  //4-4
+  upper = 0x0F;
+  x = (x>>4)&(!!(x>>4))|((x&upper)&(!(x>>4)));
+  y += (4)&(!!(x>>4))|((0)&(!(x>>4)));
+  //2-2
+  upper = 0x03;
+  x = (x>>2)&(!!(x>>2))|((x&upper)&(!(x>>2)));
+  y += (2)&(!!(x>>2))|((0)&(!(x>>2)));
+  //1-1
+  upper = 0x01;
+  x = (x>>1)&(!!(x>>1))|((x&upper)&(!(x>>1)));
+  y += (1)&(!!(x>>1))|((0)&(!(x>>1)));
+  
 
-  return 0;
+
+  return y+1;
 }
 //float
 /* 
