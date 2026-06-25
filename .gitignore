@@ -1,1 +1,23 @@
 whiteboard.txt
+# Windows
+desktop.ini
+Thumbs.db
+
+# C compiled binaries / executables
+*.exe
+*.out
+*.o
+*.a
+
+# Data Lab generated binaries
+labs/Data lab/datalab-handout/btest
+labs/Data lab/datalab-handout/dlc
+labs/Data lab/datalab-handout/fshow
+labs/Data lab/datalab-handout/ishow
+
+# Optional: VS Code
+.vscode/
+
+# Optional: temp files
+*.tmp
+*.log
