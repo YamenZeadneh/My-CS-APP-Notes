@@ -15,9 +15,9 @@ labs/Data lab/datalab-handout/dlc
 labs/Data lab/datalab-handout/fshow
 labs/Data lab/datalab-handout/ishow
 
-# Optional: VS Code
+# VS Code
 .vscode/
 
-# Optional: temp files
+# temp files
 *.tmp
 *.log
