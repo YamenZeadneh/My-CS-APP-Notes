@@ -21,3 +21,10 @@
 
 ## Special Arithmetic Operations
 ![alt text](images/Special-Arithmetic-Operations.png)
+## Condition Codes
+- CF: Carry flag. The most recent operation generated a carry out of the most
+significant bit. Used to detect overflow for unsigned operations. ` (unsigned) t < (unsigned) a`
+- ZF: Zero flag. The most recent operation yielded zero `(t == 0)`
+- SF: Sign flag. The most recent operation yielded a negative value. `(t < 0)`
+- OF: Overflow flag. The most recent operation caused a two’s-complement
+overflow—either negative or positive ` (a < 0 == b < 0) && (t < 0 != a < 0)`
