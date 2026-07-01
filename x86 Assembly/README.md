@@ -28,3 +28,5 @@ significant bit. Used to detect overflow for unsigned operations. ` (unsigned) t
 - SF: Sign flag. The most recent operation yielded a negative value. `(t < 0)`
 - OF: Overflow flag. The most recent operation caused a two’s-complement
 overflow—either negative or positive ` (a < 0 == b < 0) && (t < 0 != a < 0)`
+![alt text](images/set-instructions.png)
+![alt text](images/Comparison-and-test-instructions.png)
