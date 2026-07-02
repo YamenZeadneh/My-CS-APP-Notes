@@ -21,7 +21,7 @@
 
 ## Special Arithmetic Operations
 ![alt text](images/Special-Arithmetic-Operations.png)
-## Condition Codes
+## Condition Codes (t = a+b)
 - CF: Carry flag. The most recent operation generated a carry out of the most
 significant bit. Used to detect overflow for unsigned operations. ` (unsigned) t < (unsigned) a`
 - ZF: Zero flag. The most recent operation yielded zero `(t == 0)`
@@ -30,3 +30,5 @@ significant bit. Used to detect overflow for unsigned operations. ` (unsigned) t
 overflow—either negative or positive ` (a < 0 == b < 0) && (t < 0 != a < 0)`
 ![alt text](images/set-instructions.png)
 ![alt text](images/Comparison-and-test-instructions.png)
+## the jump instruction
+![alt text](images/jump.png)
